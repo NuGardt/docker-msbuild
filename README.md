@@ -1,7 +1,4 @@
-# Docker
-Various Windows Docker Scripts.
-
-# Microsoft .NET Build Tools
+# Microsoft .NET Build Tools as docker image
 We created these images to deploy ASP.NET projects on docker.
 
 ## Microsoft .NET Build Tools 2013 (v12.0)
@@ -15,15 +12,13 @@ docker pull nugardt/msbuild:15.5
 
 ### All Build Tools docker images include:
 NET Framework v4.5.2 Developer Pack  
-NET Framework v4.6.2 Developer Pack  
-NET Framework v4.7.0 Developer Pack  
-NET Framework v4.7.1 Developer Pack  
+NET Framework v4.6.2 Developer Pack   
 Web Deploy v3.6  
 NuGet v4.5.0
 
 ### Usage
 
-Run from withint you root source code directory (where your .SLN is).
+Run from within you root source code directory (where your .SLN is).
 
 ```powershell
 docker run -v "$(pwd):C:\Build\" nugardt/msbuild:15.5 msbuild C:\Build\NuGardt.Contoso.sln /t:rebuild /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=DockerDeploy
