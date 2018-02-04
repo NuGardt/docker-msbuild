@@ -1,0 +1,1 @@
+docker build -f msbuild.15.5.Dockerfile -t nugardt/msbuild:15.5 .
