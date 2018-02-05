@@ -1,0 +1,1 @@
+docker build -f msbuild.12.0.Dockerfile -t nugardt/msbuild:12.0 .

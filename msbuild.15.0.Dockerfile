@@ -7,7 +7,7 @@ LABEL version "2018.02.05"; \
 LABEL author "Kevin Gardthausen"; \
 LABEL vendor "NuGardt Software UG (haftungsbeschränkt)"; \
 LABEL homepage "http://www.nugardt.com;" \
-LABEL description "Microsoft .NET Build Tools 2017 (v15.5) with NuGet v4.5.0, Web Deploy v3.5, Developer Packs v4.5.2, 4.6.2 and .Net Core v1.1.7 and v2.1.4 SDK."; \
+LABEL description "Microsoft .NET Build Tools 2017 (v15.0) with NuGet v4.5.0, Web Deploy v3.5, Developer Packs v4.5.2, 4.6.2 and .Net Core v1.1.7 and v2.1.4 SDK."; \
 LABEL license MIT license; \
 LABEL comment based on alexellisio/msbuild:12.0 and https://blogs.msdn.microsoft.com/heaths/2017/09/18/installing-build-tools-for-visual-studio-2017-in-a-docker-container/;
 
@@ -69,11 +69,11 @@ RUN $ErrorActionPreference = 'Stop'; \
 	if ($ret = $p.ExitCode) { c:\collect.exe; throw ('Install failed with exit code 0x{0:x}' -f $ret) }; \
 	rm "$env:TEMP\dotnet-sdk-2.1.4-win-x64.exe"
 
-# Download and install Microsoft Build Tools 15 (latest)
+# Download and install Microsoft Build Tools 15
 RUN $ErrorActionPreference = 'Stop'; \
 	$ProgressPreference = 'SilentlyContinue'; \
 	$VerbosePreference = 'Continue'; \
-	Invoke-WebRequest -Uri "https://aka.ms/vs/15/release/vs_buildtools.exe" -OutFile $env:TEMP\vs_buildtools.exe; \
+	Invoke-WebRequest -Uri "https://download.microsoft.com/download/3/A/B/3ABDE7FA-A349-4AF0-A3AC-0D7BB0977A32/vs_BuildTools.exe" -OutFile $env:TEMP\vs_buildtools.exe; \
 	$p = Start-Process -Wait -PassThru -FilePath $env:TEMP\vs_buildtools.exe -ArgumentList '--add Microsoft.VisualStudio.Workload.MSBuildTools --add Microsoft.VisualStudio.Workload.NetCoreBuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.WebBuildTools --quiet --nocache --wait --installPath C:\BuildTools'; \
 	if ($ret = $p.ExitCode) { c:\collect.exe; throw ('Install failed with exit code 0x{0:x}' -f $ret) }; \
 	rm "$env:TEMP\vs_buildtools.exe"
